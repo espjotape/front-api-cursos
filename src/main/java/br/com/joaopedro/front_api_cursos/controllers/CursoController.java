@@ -18,16 +18,16 @@ public class CursoController {
  private ListAllCoursesService listAllCoursesService;
  
  @GetMapping()
- public String home() {
-  return "home";
- }
-
- @GetMapping("/home")
  public String list(Model model){
   var result = this.listAllCoursesService.execute(getToken(), null);
   model.addAttribute("courses", result);
   System.out.println(result);
   return "home";
+ }
+
+ @GetMapping("/create")
+ public String addCourse() {
+  return "create";
  }
 
  private String getToken(){
