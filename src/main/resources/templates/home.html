@@ -26,25 +26,11 @@
       </thead>
 
       <tbody>
-       <tr class="odd:bg-[#1B1B1B] even:bg-[#212121] border-b border-[#3A3A3A]">
-           <td class="pt-4 pb-4 text-[#E6E6E6]">React</td>
-           <td class="pt-4 pb-4 text-[#E6E6E6]">Front-end</td>
-           <td class="pt-4 pb-4 text-[#E6E6E6]">Diego Fernandes</td>
-           <td class="pt-4 pb-4 text-[#E6E6E6]">Sim</td>
-       </tr>
-       
-       <tr class="odd:bg-[#1B1B1B] even:bg-[#212121] border-b border-[#3A3A3A]">
-           <td class="pt-4 pb-4 text-[#E6E6E6]">Java</td>
-           <td class="pt-4 pb-4 text-[#E6E6E6]">Back-end</td>
-           <td class="pt-4 pb-4 text-[#E6E6E6]">Daniele Leão</td>
-           <td class="pt-4 pb-4 text-[#E6E6E6]">Não</td>
-       </tr>
-
-       <tr class="odd:bg-[#1B1B1B] even:bg-[#212121] last:border-b-0 last:rounded-bl-lg last:rounded-br-lg">
-           <td class="pt-4 pb-4 text-[#E6E6E6] rounded-bl-lg">Go</td>
-           <td class="pt-4 pb-4 text-[#E6E6E6]">Back-end</td>
-           <td class="pt-4 pb-4 text-[#E6E6E6]">Sem professor</td>
-           <td class="pt-4 pb-4 text-[#E6E6E6] rounded-br-lg">Não</td>
+       <tr th:each="course : ${courses}" class="odd:bg-[#1B1B1B] even:bg-[#212121] border-b border-[#3A3A3A]">
+           <td class="pt-4 pb-4 text-[#E6E6E6]" th:text="${course.name}"></td>
+           <td class="pt-4 pb-4 text-[#E6E6E6]" th:text="${course.category}"></td>
+           <td class="pt-4 pb-4 text-[#E6E6E6]" th:text="${course.teacherName}"></td>
+           <td class="pt-4 pb-4 text-[#E6E6E6]" th:text="${course.status == 'ATIVO' ? 'Sim' : 'Não'}"></td>
        </tr>
      </tbody>
      </table>
