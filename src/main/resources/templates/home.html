@@ -27,7 +27,11 @@
 
       <tbody>
        <tr th:each="course : ${courses}" class="odd:bg-[#1B1B1B] even:bg-[#212121] border-b border-[#3A3A3A]">
-           <td class="pt-4 pb-4 text-[#E6E6E6]" th:text="${course.name}"></td>
+        <td class="pt-4 pb-4 text-[#E6E6E6]">
+          <a th:href="@{/cursos/details/{id}(id=${course.id})}" class="hover:underline text-[#7C3AFF]">
+              <span th:text="${course.name}"></span>
+          </a>
+      </td>
            <td class="pt-4 pb-4 text-[#E6E6E6]" th:text="${course.category}"></td>
            <td class="pt-4 pb-4 text-[#E6E6E6]" th:text="${course.teacherName}"></td>
            <td class="pt-4 pb-4 text-[#E6E6E6]" th:text="${course.status == 'ATIVO' ? 'Sim' : 'Não'}"></td>

@@ -14,26 +14,26 @@
    <h1 class="text-[#7C3AFF] font-bold text-4xl mt-12 mb-7">Cursos</h1>
    
    <div class="flex-grow flex justify-center text-white">
-    <div class="w-9/12 max-w-full">
+    <div class="w-6/12 max-w-full">
      <table class="w-full shadow-lg rounded-tl-lg rounded-tr-lg">
       <thead>
        <tr class="bg-[#7C3AFF] font-bold">
-        <th class="w-full text-left pt-4 pb-4 pl-6 rounded-tl-lg rounded-tr-lg">React</th>
+        <th class="w-full text-left pt-4 pb-4 pl-6 rounded-tl-lg rounded-tr-lg"  th:text="${course.name}"></th>
        </tr>
       </thead>
 
       <tbody>
         <tr class="odd:bg-[#1B1B1B] even:bg-[#212121] border-b border-[#3A3A3A]">
-          <td class=" text-left pt-4 pb-4 pl-6 text-[#E6E6E6]">Curso: </td>
+          <td class=" text-left pt-4 pb-4 pl-6 text-[#E6E6E6]">Curso: <span th:text="${course.name}"</td>
         </tr>
         <tr class="odd:bg-[#1B1B1B] even:bg-[#212121] border-b border-[#3A3A3A]">
-          <td class="text-left pt-4 pb-4 pl-6 text-[#E6E6E6]">Categoria: </td>
+          <td class="text-left pt-4 pb-4 pl-6 text-[#E6E6E6]">Categoria: <span th:text="${course.category}"</td>
         </tr>
         <tr class="odd:bg-[#1B1B1B] even:bg-[#212121] border-b border-[#3A3A3A]">
-          <td class="text-left pt-4 pb-4 pl-6 text-[#E6E6E6]">Professor(a): </td>
+          <td class="text-left pt-4 pb-4 pl-6 text-[#E6E6E6]">Professor(a): <span th:text="${course.teacherName}"</td>
         </tr>
         <tr class="odd:bg-[#1B1B1B] even:bg-[#212121]">
-          <td class="text-left pt-4 pb-4 pl-6 text-[#E6E6E6] rounded-bl-lg rounded-br-lg ">Inicio: Desde </td>
+          <td class="text-left pt-4 pb-4 pl-6 text-[#E6E6E6] rounded-bl-lg rounded-br-lg ">Inicio: Desde <span th:text="${course.updatedAt}"</td>
         </tr>
       </tbody>
      </table>
