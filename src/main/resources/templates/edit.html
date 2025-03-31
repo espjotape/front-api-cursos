@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+ <script src="https://cdn.tailwindcss.com"></script>
+ <title>Editar o curso</title>
+</head>
+<body class="bg-[#141414]">
+  <section class="text-center flex flex-col h-screen">
+   <h1 class="text-[#7C3AFF] font-bold text-4xl mt-12 mb-7">Cursos</h1>
+   
+   <div class="flex-grow flex justify-center text-white ">
+    <div class="w-9/12 max-w-full">
+     <form th:method="post" th:action="@{/cursos/edit/{id}(id=${course.id})}" th:object="${course}" >
+      <div class="flex flex-col gap-3">
+       <input type="hidden" name ="id" th:value="*{id}">
+  
+       <input type="text" name="name" 
+       th:value="*{name}"
+       placeholder="Digite o nome do curso"
+       class="w-full p-4 rounded-lg bg-[#1B1B1B] text-xd text-white border border-[#292929] placeholder-[#E6E6E6]">
+ 
+       <input type="text" name="category" 
+       th:value="*{category}"
+       placeholder="Digite a categoria"
+       class="w-full p-4 rounded-lg bg-[#1B1B1B] text-xd text-white border border-[#292929] placeholder-[#E6E6E6]">
+      
+       <input type="text" name="teacherName" 
+       th:value="*{teacherName}"
+       placeholder="Professor(a)"
+       class="w-full p-4 rounded-lg bg-[#1B1B1B] text-xd text-white border border-[#292929] placeholder-[#E6E6E6]">
+      
+       <button class="text-center text-white font-bold bg-[#7C3AFF] hover:bg-[#4412A5] rounded-lg px-5 py-2.5">
+        Editar
+       </button>
+      </form>
+      </div>
+    </div>
+   </div>
+  </section>
+</body>
+</html>

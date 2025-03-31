@@ -19,6 +19,7 @@ import br.com.joaopedro.front_api_cursos.service.CreateCourseService;
 import br.com.joaopedro.front_api_cursos.service.DeleteCourseService;
 import br.com.joaopedro.front_api_cursos.service.ListAllCoursesService;
 import br.com.joaopedro.front_api_cursos.service.SearchCourseService;
+import br.com.joaopedro.front_api_cursos.service.UpdateCourseService;
 
 @Controller
 @RequestMapping("/cursos")
@@ -34,6 +35,9 @@ public class CursoController {
 
  @Autowired
  private DeleteCourseService deleteCourseService;
+
+ @Autowired 
+ private UpdateCourseService updateCourseService;
 
  @GetMapping("/home")
  public String list(Model model){
@@ -85,6 +89,19 @@ public class CursoController {
      }
  }
  
+ @GetMapping("/edit/{id}")
+ public String PageEdit(@PathVariable UUID id, Model model) {
+    CourseDTO course = searchCourseService.searchCourseById(id);
+    model.addAttribute("course", course);
+    return "edit";
+ }
+
+ @PostMapping("/edit/{id}")
+ public String editCourse(@PathVariable UUID id, Model model, CourseDTO course) {
+    updateCourseService.execute(course, getToken(), id);
+    return "redirect:/cursos/home";
+ }
+
  private String getToken(){
   Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
   return authentication.getDetails().toString();
