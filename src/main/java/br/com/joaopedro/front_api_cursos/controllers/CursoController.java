@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import br.com.joaopedro.front_api_cursos.dto.CourseDTO;
 import br.com.joaopedro.front_api_cursos.dto.CreateCourseDTO;
 import br.com.joaopedro.front_api_cursos.service.CreateCourseService;
+import br.com.joaopedro.front_api_cursos.service.DeleteCourseService;
 import br.com.joaopedro.front_api_cursos.service.ListAllCoursesService;
 import br.com.joaopedro.front_api_cursos.service.SearchCourseService;
 
@@ -30,6 +31,9 @@ public class CursoController {
 
  @Autowired
  private SearchCourseService searchCourseService;
+
+ @Autowired
+ private DeleteCourseService deleteCourseService;
 
  @GetMapping("/home")
  public String list(Model model){
@@ -69,6 +73,18 @@ public class CursoController {
   return "details";
  }
 
+ @PostMapping("/delete/{id}")
+ public String deleteCourse(@PathVariable UUID id) {
+     try {
+         // Chama o serviço para excluir o curso
+         deleteCourseService.execute(id);
+         return "redirect:/cursos/home";
+     } catch (Exception e) {
+         e.printStackTrace();
+         return "error";
+     }
+ }
+ 
  private String getToken(){
   Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
   return authentication.getDetails().toString();
