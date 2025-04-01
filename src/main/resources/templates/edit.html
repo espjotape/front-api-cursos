@@ -22,18 +22,22 @@
        <input type="text" name="name" 
        th:value="*{name}"
        placeholder="Digite o nome do curso"
-       class="w-full p-4 rounded-lg bg-[#1B1B1B] text-xd text-white border border-[#292929] placeholder-[#E6E6E6]">
+       class="w-full p-4 rounded-lg bg-[#1B1B1B] text-xd text-white border border-[#292929] placeholder-[#E6E6E6]"
+       required>
  
        <input type="text" name="category" 
        th:value="*{category}"
        placeholder="Digite a categoria"
-       class="w-full p-4 rounded-lg bg-[#1B1B1B] text-xd text-white border border-[#292929] placeholder-[#E6E6E6]">
+       class="w-full p-4 rounded-lg bg-[#1B1B1B] text-xd text-white border border-[#292929] placeholder-[#E6E6E6]"
+       required>
       
        <input type="text" name="teacherName" 
        th:value="*{teacherName}"
        placeholder="Professor(a)"
        class="w-full p-4 rounded-lg bg-[#1B1B1B] text-xd text-white border border-[#292929] placeholder-[#E6E6E6]">
-      
+       
+       <p class="text-red-400" th:if="${error_message}" th:text="${error_message}"></p>
+
        <button class="text-center text-white font-bold bg-[#7C3AFF] hover:bg-[#4412A5] rounded-lg px-5 py-2.5">
         Editar
        </button>

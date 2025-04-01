@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.security.core.Authentication;
 
 import br.com.joaopedro.front_api_cursos.dto.CourseDTO;
@@ -54,10 +56,15 @@ public class CursoController {
  }
 
  @PostMapping("/create")
- public String createCourse(@ModelAttribute CreateCourseDTO course){
-  var result = this.createCourseService.execute(course, getToken());
-  System.out.println(result);
-  return "redirect:/cursos/home";
+ public String createCourse(@ModelAttribute CreateCourseDTO course, RedirectAttributes redirectAttributes){
+    try {
+        var result = this.createCourseService.execute(course, getToken());
+        System.out.println(result);
+        return "redirect:/cursos/home";
+    }catch(HttpClientErrorException e) {
+        redirectAttributes.addFlashAttribute("error_message", "Usuário ou Senha incorretos!");
+        return "redirect:/cursos/create";
+    }
  }
  
  @GetMapping("/details/{id}")
@@ -95,12 +102,23 @@ public class CursoController {
     model.addAttribute("course", course);
     return "edit";
  }
-
+ 
  @PostMapping("/edit/{id}")
- public String editCourse(@PathVariable UUID id, Model model, CourseDTO course) {
-    updateCourseService.execute(course, getToken(), id);
-    return "redirect:/cursos/home";
- }
+ public String editCourse(@PathVariable UUID id, Model model, CourseDTO course, RedirectAttributes redirectAttributes) {
+    try {
+        if (course.getName() == null || course.getName().trim().isEmpty() ||
+            course.getCategory() == null || course.getCategory().trim().isEmpty()) {
+            redirectAttributes.addFlashAttribute("error_message", "Por favor, preencha os campos de nome do curso e a categoria");
+            return "redirect:/cursos/edit/" + id;
+        }
+        updateCourseService.execute(course, getToken(), id);
+        return "redirect:/cursos/home";
+
+    } catch (HttpClientErrorException e) {
+        redirectAttributes.addFlashAttribute("error_message", "Erro ao atualizar curso. Tente novamente.");
+        return "redirect:/cursos/edit/" + id;
+    }
+}
 
  private String getToken(){
   Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
