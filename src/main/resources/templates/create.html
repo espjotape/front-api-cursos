@@ -22,25 +22,29 @@
        type="text" 
        placeholder="Nome"
        class="w-full p-4 rounded-lg bg-[#1B1B1B] text-xd text-white border border-[#292929] placeholder-[#E6E6E6]"
-       >
+       required>
+
        <input 
        name="category" th:field="*{category}"
        type="text" 
        placeholder="Categoria"
        class="w-full p-4 rounded-lg bg-[#1B1B1B] text-xd text-white border border-[#292929] placeholder-[#E6E6E6]"
-       >
+       required>
+
        <input 
        name="teacherName" th:field="*{teacherName}"
        type="text" 
        placeholder="Professor(a)"
        class="w-full p-4 rounded-lg bg-[#1B1B1B] text-xd text-white border border-[#292929] placeholder-[#E6E6E6]"
        >
+
        <input 
        name="status" th:field="*{status}"
        type="text" 
        placeholder="Ativo"
        class="w-full p-4 rounded-lg bg-[#1B1B1B] text-xd text-white border border-[#292929] placeholder-[#E6E6E6]"
        >
+       
       </div>
       <button type="submit" class="bg-[#7C3AFF] hover:bg-[#4412A5] w-36 text-center mt-7 rounded-lg px-5 py-2.5 rounded-lg bold">
        Cadastrar

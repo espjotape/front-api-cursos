@@ -56,16 +56,22 @@ public class CursoController {
  }
 
  @PostMapping("/create")
- public String createCourse(@ModelAttribute CreateCourseDTO course, RedirectAttributes redirectAttributes){
+  public String createCourse(@ModelAttribute CreateCourseDTO course, RedirectAttributes redirectAttributes) {
     try {
+        if (course.getName() == null || course.getName().trim().isEmpty() ||
+            course.getCategory() == null || course.getCategory().trim().isEmpty()) {
+            redirectAttributes.addFlashAttribute("error_message", "Course name and category are required fields");
+            return "redirect:/cursos/create";
+        }
+
         var result = this.createCourseService.execute(course, getToken());
-        System.out.println(result);
         return "redirect:/cursos/home";
-    }catch(HttpClientErrorException e) {
-        redirectAttributes.addFlashAttribute("error_message", "Usuário ou Senha incorretos!");
+        
+    } catch (HttpClientErrorException e) {
+        redirectAttributes.addFlashAttribute("error_message", "Error creating course. Please try again.");
         return "redirect:/cursos/create";
     }
- }
+}
  
  @GetMapping("/details/{id}")
  public String getCourseDetails(@PathVariable UUID id, Model model) {
