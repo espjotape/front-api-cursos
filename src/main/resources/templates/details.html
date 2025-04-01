@@ -38,16 +38,18 @@
         </tbody>
        </table>
 
-       <div class="flex justify-between gap-5">
+       <div class="flex gap-5 w-full">
         <a th:href="@{/cursos/edit/{id}(id=${course.id})}"
-          class="flex-1 text-center text-white font-bold bg-[#7C3AFF] hover:bg-[#4412A5] rounded-lg px-5 py-2.5 mt-7">
+          class="w-1/2 text-center text-white font-bold bg-[#7C3AFF] hover:bg-[#4412A5] rounded-lg px-5 py-2.5 mt-7">
           Editar
         </a>
-        <a th:href="@{/cursos/delete/{id}(id=${course.id})}"
-          class="flex-1 text-center text-white font-bold bg-[#BA0000] hover:bg-[#8C1010] rounded-lg px-5 py-2.5 mt-7">
-          Excluir curso
-        </a>
-       </div>
+        <form th:action="@{/cursos/delete/{id}(id=${course.id})}" method="post" class="w-1/2">
+          <button type="submit"
+            class="w-full text-center text-white font-bold bg-[#BA0000] hover:bg-[#8C1010] rounded-lg px-5 py-2.5 mt-7">
+            Excluir curso
+          </button>
+        </form>
+      </div>
      </form>
     </div>
    </div>
