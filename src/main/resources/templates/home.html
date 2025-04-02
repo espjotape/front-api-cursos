@@ -35,7 +35,14 @@
           </td>
            <td class="pt-4 pb-4 text-[#E6E6E6]" th:text="${course.category}"></td>
            <td class="pt-4 pb-4 text-[#E6E6E6]" th:text="${course.teacherName}"></td>
-           <td class="pt-4 pb-4 text-[#E6E6E6]" th:text="${course.status == 'ATIVO' ? 'Sim' : 'Não'}"></td>
+           <td class="pt-4 pb-4 text-[#E6E6E6]">
+            <form th:action="@{'/cursos/active/' + ${course.id}}" method="post">
+                <button type="submit"
+                    class="transition-all duration-300 ease-in-out hover:bg-[#7C3AFF] hover:text-white px-3 py-1 rounded-md">
+                    <span th:text="${course.status == 'ATIVO'} ? 'Sim' : 'Não'"></span>
+                </button>
+            </form>
+        </td>     
        </tr>
      </tbody>
      </table>

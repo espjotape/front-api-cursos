@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.security.core.Authentication;
 
 import br.com.joaopedro.front_api_cursos.dto.CourseDTO;
 import br.com.joaopedro.front_api_cursos.dto.CreateCourseDTO;
+import br.com.joaopedro.front_api_cursos.service.ActiveCourseService;
 import br.com.joaopedro.front_api_cursos.service.CreateCourseService;
 import br.com.joaopedro.front_api_cursos.service.DeleteCourseService;
 import br.com.joaopedro.front_api_cursos.service.ListAllCoursesService;
@@ -41,11 +43,13 @@ public class CursoController {
  @Autowired 
  private UpdateCourseService updateCourseService;
 
+ @Autowired 
+ private ActiveCourseService activeCourseService;
+
  @GetMapping("/home")
  public String list(Model model){
   var result = this.listAllCoursesService.execute(getToken(), null);
   model.addAttribute("courses", result);
-  System.out.println(result);
   return "home";
  }
 
@@ -78,7 +82,6 @@ public class CursoController {
   CourseDTO course = searchCourseService.searchCourseById(id);
 
   if (course == null) {
-   // Caso o curso não seja encontrado, você pode redirecionar para uma página de erro ou mostrar uma mensagem
    model.addAttribute("error", "Curso não encontrado.");
    return "error";
 }
@@ -93,7 +96,6 @@ public class CursoController {
  @PostMapping("/delete/{id}")
  public String deleteCourse(@PathVariable UUID id) {
      try {
-         // Chama o serviço para excluir o curso
          deleteCourseService.execute(id);
          return "redirect:/cursos/home";
      } catch (Exception e) {
@@ -125,6 +127,12 @@ public class CursoController {
         return "redirect:/cursos/edit/" + id;
     }
 }
+
+ @PostMapping("/active/{id}")
+ public String toggleCurso(@PathVariable UUID id, RedirectAttributes redirectAttributes) {
+   activeCourseService.toggleCourseStatus(id);
+   return "redirect:/cursos/home";
+ }
 
  private String getToken(){
   Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
