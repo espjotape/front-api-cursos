@@ -33,7 +33,7 @@
             <td class="text-left pt-4 pb-4 pl-6 text-[#E6E6E6]">Professor(a): <span th:text="${course.teacherName}"></span></td>
           </tr>
           <tr class="odd:bg-[#1B1B1B] even:bg-[#212121]">
-            <td class="text-left pt-4 pb-4 pl-6 text-[#E6E6E6] rounded-bl-lg rounded-br-lg">Início: Desde <span th:text="${course.updatedAt}"></span></td>
+            <td class="text-left pt-4 pb-4 pl-6 text-[#E6E6E6] rounded-bl-lg rounded-br-lg">Início: Desde  <span th:text="${#temporals.format(course.createdAt, 'dd/MM/yyyy')}"></span></td>
           </tr>
         </tbody>
        </table>
